@@ -1,8 +1,9 @@
 # ShopZone API
 
 The API uses Node.js built-in SQLite storage and requires Node.js 22.5 or newer.
-The first server start creates `data/shopzone.sqlite` and seeds the sample catalog.
-The database path can be changed with `DATABASE_PATH`.
+The first server start creates the configured database and seeds the sample
+catalog. Locally, it defaults to `data/shopzone.sqlite`; change its path with
+`DATABASE_PATH`.
 
 ## Run locally
 
@@ -34,3 +35,8 @@ settings as needed before production use.
 Do not commit `.env` or real payment credentials. Configure HTTPS, production
 provider credentials, and payment webhooks before using this prototype for live
 transactions.
+
+The Render free plan has no persistent filesystem disk. If deployed there,
+SQLite data can be lost when the service restarts or redeploys. Use a paid
+persistent disk or an external database for durable customer, order, and
+product data.
