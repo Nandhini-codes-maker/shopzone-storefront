@@ -1,9 +1,10 @@
 # Publish ShopZone
 
 The deployment setup uses Vercel for the storefront and same-origin API proxy,
-and Render for the API and persistent SQLite database. The same-origin proxy is
-important: browsers can block sign-in cookies when the frontend and API use
-different hosting domains.
+and Render for the API. The free Render service stores SQLite on its temporary
+filesystem, so accounts, orders, and admin product changes can be lost when the
+service restarts or redeploys. The same-origin proxy keeps browser login cookies
+working without cross-site cookie restrictions.
 
 ## 1. Push this project to GitHub
 
@@ -12,9 +13,12 @@ all credentials out of Git; `backend/.gitignore` excludes them.
 
 ## 2. Deploy the Render backend
 
-In Render, choose **New → Blueprint**, connect the GitHub repository, and let
-Render read `render.yaml` from the repository root. The Blueprint creates a
-Node API service with a persistent disk mounted at `/var/data` for SQLite.
+In Render, choose **New → Web Service** and use the public repository URL
+`https://github.com/Nandhini-codes-maker/shopzone-storefront`. Set the root
+directory to `backend`, runtime to Node, build command to `npm install`, and
+start command to `npm start`. Choose the free instance plan. The root-level
+`render.yaml` documents the service configuration; the free plan does not
+provide persistent disk storage.
 
 During setup, provide:
 

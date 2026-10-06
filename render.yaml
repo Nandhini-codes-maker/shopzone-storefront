@@ -3,7 +3,7 @@ services:
     name: shopzone-api
     runtime: node
     rootDir: backend
-    plan: starter
+    plan: free
     buildCommand: npm install
     startCommand: npm start
     healthCheckPath: /api/health
@@ -11,7 +11,7 @@ services:
       - key: NODE_ENV
         value: production
       - key: DATABASE_PATH
-        value: /var/data/shopzone.sqlite
+        value: /tmp/shopzone.sqlite
       - key: ADMIN_EMAIL
         sync: false
       - key: ADMIN_PASSWORD
@@ -28,7 +28,3 @@ services:
         sync: false
       - key: PAYPAL_ENV
         value: sandbox
-    disk:
-      name: shopzone-data
-      mountPath: /var/data
-      sizeGB: 1
